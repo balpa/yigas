@@ -1,6 +1,110 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+:root {
+  --background: #f0f0f0;
+  --header: #e7e7e7;
+}
+
+.main-wrapper {
+  width: 100vw;
+  min-height: 100vh;
+  background-color: var(--background);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header-menu {
+  width: 100%;
+  height: 80px;
+  background-color: var(--header);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+  color: black;
+  border-bottom: 1px solid gray;
+}
+
+.content-wrapper {
+  width: 100%;
+  min-height: 1000px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.content-text-wrapper {
+  color: black;
+}
+
+.content-container {
+  width: 720px;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+
+.footer-wrapper {
+  width: 100%;
+  height: 40px;
+  background-color: var(--background);
+  display: flex;
+  justify-content: center;
+  color: black;
+  align-items: center;
+}
+
+.logo {
+  margin-right: 50px;
+}
+
+.header-about-me-wrapper {
+  width: 1080px;
+  height: 450px;
+  margin: 50px 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+}
+
+.header-about-me-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: wheat;
+  width: 50%;
+  color: black;
+}
+
+.header-about-me-right {
+  width: 50%;
+  height: 200px;
+  background-image: url('https://cdn.discordapp.com/attachments/291973336500535298/1142544596161798155/172FCC67-CB96-43D6-8CAF-2AB7FD17D237.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 10px;
+}
+
+.header-about-me-bold-title {
+  font-size: 48px;
+}
+
+.content-text-title {
+  font-size: 48px;
+}
+
+.footer-left {
+  width: 40%;
+}
+
+.footer-right {
+  width: 40%;
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
 }
