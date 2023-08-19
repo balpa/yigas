@@ -1,13 +1,13 @@
 import '../App.css'
 import Header from '../components/Header'
-import JournalContent from '../components/journal/JournalContent'
+import ContactContent from '../components/contact/ContactContent'
 import Footer from '../components/Footer'
 
-export default function Journal() {
+export default function Contact() {
   return (
     <div className="main-wrapper">
         <Header />
-        <JournalContent />
+        <ContactContent />
         <Footer />
     </div>
   )

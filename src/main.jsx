@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import Home from './routes/Home';
 import Journal from './routes/Journal'
+import Contact from './routes/Contact';
 import {
   createBrowserRouter,
   RouterProvider,
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
   {
     path: "/journal",
     element: <Journal />,
+  },
+  {
+    path: "/contact",
+    element: <Contact />,
   },
   {
     path: "/*",
