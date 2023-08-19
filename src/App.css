@@ -3,6 +3,10 @@
   --header: #e7e7e7;
 }
 
+body {
+  font-family: 'Ubuntu', sans-serif !important;
+}
+
 .main-wrapper {
   width: 100vw;
   min-height: 100vh;
@@ -26,7 +30,6 @@
 
 .content-wrapper {
   width: 100%;
-  min-height: 1000px;
   background-color: white;
   display: flex;
   flex-direction: column;
@@ -44,6 +47,8 @@
   flex-direction: column;
   align-items: center;
   gap: 30px;
+  box-shadow: 1px 0px 10px -7px rgb(0 0 0 / 80%), -1px 0px 10px -7px rgb(0 0 0 / 80%);
+  padding: 25px 30px;
 }
 
 .footer-wrapper {
@@ -75,7 +80,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: wheat;
   width: 50%;
   color: black;
 }
@@ -107,4 +111,32 @@
   display: flex;
   justify-content: flex-end;
   gap: 15px;
+}
+
+.footer-right > a {
+  display: flex;
+}
+
+.menu-item {
+  transition: 0.5s;
+  will-change: transform;
+}
+
+.menu-item:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+.journal-content-wrapper {
+  width: 100%;
+  min-height: 1000px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.journal-content-container {
+  width: 720px;
+  min-height: 800px;
+  background-color: white;
 }
