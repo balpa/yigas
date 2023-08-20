@@ -1,17 +1,24 @@
 import '../App.css'
 import MenuItem from './menu/MenuItem'
-import PropTypes from 'prop-types';
 import Logo from './Logo'
+import Hamburger from './menu/Hamburger';
+import PropTypes from 'prop-types';
+
 
 function Header({isHomePage}) {
   return (
     <>
     <div className="header-menu">
-      <Logo />
-      <MenuItem name={'About'}/>
-      <MenuItem name={'Journal'}/>
-      <MenuItem name={'Blog'}/>
-      <MenuItem name={'Contact'}/>
+      <div className="desktop-menu-wrapper">
+        <Logo />
+        <MenuItem name={'About'}/>
+        <MenuItem name={'Journal'}/>
+        <MenuItem name={'Blog'}/>
+        <MenuItem name={'Contact'}/>
+      </div>
+      <div className="mobile-menu-wrapper">
+        <Hamburger />
+      </div>
     </div>
     {isHomePage && <div className="header-about-me-wrapper">
       <div className="header-about-me-left">
