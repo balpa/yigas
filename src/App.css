@@ -217,7 +217,11 @@ body {
 
 .mobile-menu-wrapper {
   position: absolute;
-  right: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 95%;
+  display: none;
 }
 
 .hamburger-wrapper {
@@ -263,6 +267,11 @@ body {
   .footer-left {
     width: auto;
   }
+
+  .footer-left > a, .footer-left > :active, .footer-left > a:visited {
+    color: black;
+    text-decoration: underline;
+  }
   
   .contact-content-box {
     width: 80vw;
@@ -275,7 +284,11 @@ body {
 
 @media screen and (max-width: 480px) {
   .hamburger-menu-wrapper {
-    display: block;
+    display: block !important;
+  }
+
+  .mobile-menu-wrapper {
+    display: flex !important;
   }
 
   .desktop-menu-wrapper {

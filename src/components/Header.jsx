@@ -4,7 +4,6 @@ import Logo from './Logo'
 import Hamburger from './menu/Hamburger';
 import PropTypes from 'prop-types';
 
-
 function Header({isHomePage}) {
   return (
     <>
@@ -17,6 +16,7 @@ function Header({isHomePage}) {
         <MenuItem name={'Contact'}/>
       </div>
       <div className="mobile-menu-wrapper">
+        <Logo />
         <Hamburger />
       </div>
     </div>
