@@ -137,16 +137,64 @@ body {
 
 .journal-content-wrapper {
   width: 100%;
-  min-height: 1000px;
+  min-height: calc(100vh - 122px);
   display: flex;
   flex-direction: column;
   align-items: center;
+  color: black;
 }
 
 .journal-content-container {
   width: 720px;
-  min-height: 800px;
+  min-height: calc(100vh - 122px);
   background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding-bottom: 20px;
+}
+
+.journal-post-wrapper {
+  border: 1px solid black;
+  border-radius: 10px;
+  width: 90%;
+  min-height: 100px;
+  padding: 25px 10px 10px 10px;
+  position: relative;
+}
+
+.journal-post-text {
+  width: 100%;
+  word-break: break-word;
+  font-size: 13.5px;
+}
+
+.journal-content-quote {
+  letter-spacing: 0.4em;
+  padding: 20px 50px 5px 50px;
+  text-align: center;
+}
+
+.journal-content-title {
+  padding: 5px 50px;
+  text-align: center;
+  font-size: 48px;
+  margin: -20px 0px;
+}
+
+.journal-post-date {
+  position: absolute;
+  top: 2px;
+  right: 5px;
+  font-size: 10px;
+}
+
+.journal-post-clock {
+  position: absolute;
+  top: 2px;
+  left: 5px;
+  font-size: 10px;
 }
 
 .contact-content-wrapper {

@@ -8,8 +8,7 @@ function ContactContent() {
 
   const emailValidationRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
 
-  const handleSubmit = () => {
-    const isValid = emailValidationRegex.test(email)
+  const handleSubmit = async () => {
   }
 
   return (
