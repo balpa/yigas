@@ -3,6 +3,7 @@ import Home from './routes/Home';
 import Journal from './routes/Journal'
 import Contact from './routes/Contact';
 import Admin from './routes/Admin';
+import Blog from './routes/Blog';
 import {
   createBrowserRouter,
   RouterProvider,
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
   {
     path: "/admin",
     element: <Admin />,
+  },
+  {
+    path: "/blog",
+    element: <Blog />,
   },
   {
     path: "/*",
