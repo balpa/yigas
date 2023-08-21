@@ -5,6 +5,7 @@
 
 body {
   font-family: 'Ubuntu', sans-serif !important;
+  overflow-x: hidden;
 }
 
 .main-wrapper {
@@ -145,7 +146,7 @@ body {
 }
 
 .journal-content-container {
-  width: 720px;
+  width: 900px;
   min-height: calc(100vh - 122px);
   background-color: white;
   display: flex;
@@ -250,6 +251,39 @@ body {
 
 .contact-content-email-send-button:hover {
   background-color: #444444;
+}
+
+.admin-page-wrapper {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(31, 31, 31);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.admin-page-container {
+  width: 80%;
+  height: 80%;
+  background-color: rgb(117, 117, 117);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.admin-post-text {
+  width: 90%;
+  height: 50%;
+  background-color: white;
+  color: black;
+  font-family: 'Ubuntu';
+  padding: 20px;
+}
+
+.admin-post-button {
+  background-color: #4f4f4f;
 }
 
 .hamburger-icon {

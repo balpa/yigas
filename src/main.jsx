@@ -1,8 +1,8 @@
-import React from 'react'
 import ReactDOM from 'react-dom/client'
 import Home from './routes/Home';
 import Journal from './routes/Journal'
 import Contact from './routes/Contact';
+import Admin from './routes/Admin';
 import {
   createBrowserRouter,
   RouterProvider,
@@ -21,6 +21,10 @@ const router = createBrowserRouter([
   {
     path: "/contact",
     element: <Contact />,
+  },
+  {
+    path: "/admin",
+    element: <Admin />,
   },
   {
     path: "/*",
