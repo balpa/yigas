@@ -237,6 +237,7 @@ body {
   letter-spacing: 0.4em;
   padding: 20px 50px 5px 50px;
   text-align: center;
+  font-style: italic;
 }
 
 .journal-content-title {
