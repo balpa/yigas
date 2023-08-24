@@ -15,7 +15,7 @@ function ContactContent() {
     <div className='contact-content-wrapper'>
         <div className='contact-content-container'>
           <div className='contact-content-box'>
-            <div className="contact-content-email-title">TITLE</div>
+            <div className="contact-content-email-title">Reach out to me!</div>
             <input
               className='contact-content-email-input default-input'
               placeholder='Your E-mail'

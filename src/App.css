@@ -8,6 +8,10 @@ body {
   overflow-x: hidden;
 }
 
+a {
+  color: black !important;
+}
+
 .main-wrapper {
   width: 100vw;
   min-height: 100vh;
@@ -268,6 +272,10 @@ body {
   align-items: center;
 }
 
+.contact-content-email-title {
+  text-align: center !important;
+}
+
 .contact-content-container {
   min-height: calc(100vh - 122px);
   display: flex;
@@ -427,11 +435,12 @@ body {
 
   .footer-left {
     width: auto;
+    color: black !important;
   }
 
   .footer-left > a, .footer-left > :active, .footer-left > a:visited {
-    color: black;
-    text-decoration: underline;
+    color: black !important;
+    text-decoration: underline !important;
   }
   
   .contact-content-box {

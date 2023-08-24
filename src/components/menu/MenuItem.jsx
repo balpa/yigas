@@ -9,7 +9,7 @@ function MenuItem({ name }) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    setTimeout(() => setPathName(window.location.pathname.replace('/', '')), 500)
+    setPathName(window.location.pathname.replace('/', ''))
   }, [])
 
   return (

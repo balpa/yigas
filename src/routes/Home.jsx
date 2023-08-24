@@ -7,7 +7,7 @@ function Home() {
   return (
     <>
       <div className="main-wrapper">
-        <Header isHomePage={true}/>
+        <Header isHomePage={true} />
         <Content />
         <Footer />
       </div>
