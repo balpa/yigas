@@ -5,6 +5,7 @@ import Contact from './routes/Contact';
 import Admin from './routes/Admin';
 import Blog from './routes/Blog';
 import PostBlog from './routes/PostBlog';
+import BlogPostDetailPage from './components/blog/BlogPostDetailPage';
 import {
   createBrowserRouter,
   RouterProvider,
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
   {
     path: "/blog",
     element: <Blog />,
+  },
+  {
+    path: "/blog/:blogPostId",
+    element: <BlogPostDetailPage />,
   },
   {
     path: "/*",

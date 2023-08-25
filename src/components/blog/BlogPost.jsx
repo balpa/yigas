@@ -1,33 +1,26 @@
 import '../../App.css'
-import { collection, getDocs } from "firebase/firestore";
-import { useEffect, useState } from 'react';
-import { db } from '../../../firebase'
 import ReactHtmlParser from 'react-html-parser';
+import { useNavigate } from "react-router-dom";
+import PropTypes from 'prop-types'
 
-function BlogPost() {
-  const [isDataFetched, setIsDataFetched] = useState(false)
-  const [test, setTest] = useState('')
+function BlogPost({blogData}) {
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchPosts = async () => {
-      if (!isDataFetched) {
-        const querySnapshot = await getDocs(collection(db, "blog"));
-        querySnapshot.forEach((doc) => setTest(ReactHtmlParser((doc.data().text))));
-  
-        setIsDataFetched(true)
-      }
-    }
-  
-    fetchPosts()
-  }, [])
+  const openBlogDetailsPage = () => {
+    navigate(`/blog/${blogData.date}`, {state: blogData});
+  }
 
   return (
-    <div className='blog-post-wrapper'>
+    <div className='blog-post-wrapper' onClick={() => openBlogDetailsPage()}>
         <div className='blog-post-container'>
-          {test}
+          {ReactHtmlParser(blogData.text)}
         </div>
     </div>
   )
 }
 
 export default BlogPost
+
+BlogPost.propTypes = {
+  blogData: PropTypes.object,
+}
