@@ -322,10 +322,13 @@ a {
   border: 1px solid gray;
   background-color: white;
   padding: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
   color: black;
+}
+
+.contact-content-box > form {
+  display: flex;
+  flex-direction: column !important;
+  gap: 15px;
 }
 
 .default-input {
@@ -346,13 +349,14 @@ a {
   resize: none;
 }
 
-.contact-content-email-send-button {
+.contact-content-email-send-button, .contact-content-box > form > input:last-child {
   transition: 0.5s;
   border: none;
   border-radius: 5px;
+  height: 30px;
 }
 
-.contact-content-email-send-button:hover {
+.contact-content-email-send-button:hover, .contact-content-box > form > input:last-child {
   background-color: #444444;
 }
 
