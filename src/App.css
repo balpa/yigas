@@ -1,6 +1,9 @@
 :root {
   --background: #f0f0f0;
   --header: #e7e7e7;
+  --burgundy: #800020;
+  --headerFont: #2a363b;
+  --menuActiveFont: #ff847c;
 }
 
 body {
@@ -13,29 +16,31 @@ a {
 }
 
 .main-wrapper {
-  width: 100vw;
+  width: 99.99vw;
   min-height: 100vh;
   background-color: var(--background);
   display: flex;
   flex-direction: column;
   align-items: center;
+  -webkit-font-smoothing: antialiased !important;
 }
 
 .header-menu, .desktop-menu-wrapper {
   width: 100%;
   height: 80px;
-  background-color: var(--header);
+  background-color: var(--burgundy);
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 50px;
-  color: black;
+  color: wheat;
   border-bottom: 1px solid gray;
 }
 
 .menu-bold {
   font-weight: 900 !important;
-  transform: scale(1.1);
+  /*transform: scale(1.1);*/
+  letter-spacing: 1px;
 }
 
 .content-wrapper {
@@ -65,10 +70,10 @@ a {
 .footer-wrapper {
   width: 100%;
   height: 40px;
-  background-color: var(--background);
+  background-color: var(--burgundy);
   display: flex;
   justify-content: center;
-  color: black;
+  color: wheat;
   align-items: center;
   border-top: 1px solid gray;
 }
@@ -119,11 +124,18 @@ a {
 }
 
 .content-text-title {
-  font-size: 48px;
+  font-size: 36px;
+  font-weight: 900 !important;
 }
 
 .footer-left {
   width: 40%;
+}
+
+.footer-left > a {
+  width: 40%;
+  text-decoration: underline !important;
+  color: wheat !important;
 }
 
 .footer-right {
@@ -279,7 +291,7 @@ a {
 }
 
 .contact-content-container {
-  min-height: calc(100vh - 122px);
+  min-height: calc(100vh - 162px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -445,21 +457,17 @@ a {
 }
 
 @media screen and (max-width: 720px) {
-  .content-container {
-    width: auto;
-  }
-
   .footer-right {
     width: 30%;
   }
 
   .footer-left {
     width: auto;
-    color: black !important;
+    color: wheat !important;
   }
 
   .footer-left > a, .footer-left > :active, .footer-left > a:visited {
-    color: black !important;
+    color: wheat !important;
     text-decoration: underline !important;
   }
   
@@ -467,11 +475,7 @@ a {
     width: 80vw;
   }
 
-  .journal-content-container {
-    width: auto;
-  }
-
-  .blog-content-container {
+  .journal-content-container, .content-container, .blog-content-container, .blog-post-detail-page-wrapper {
     width: auto !important;
   }
 
