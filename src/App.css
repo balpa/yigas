@@ -33,7 +33,7 @@ a {
   justify-content: center;
   align-items: center;
   gap: 50px;
-  color: wheat;
+  color: rgba(255,255,255,0.85);
   border-bottom: 1px solid gray;
 }
 
@@ -73,7 +73,7 @@ a {
   background-color: var(--burgundy);
   display: flex;
   justify-content: center;
-  color: wheat;
+  color: rgba(255,255,255,0.85);
   align-items: center;
   border-top: 1px solid gray;
 }
@@ -90,7 +90,7 @@ a {
 
 .header-about-me-wrapper {
   max-width: 1080px;
-  min-height: 450px;
+  min-height: 300px;
   margin: 50px 0px;
   display: flex;
   justify-content: center;
@@ -109,6 +109,24 @@ a {
 }
 
 .header-about-me-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header-about-me-right-social-media-wrapper {
+  margin-top: 10px;
+  display: flex;
+  gap: 7px;
+  width: 100%;
+  justify-content: space-evenly;
+}
+
+.header-about-me-right-social-media-wrapper > a {
+  height: 24px !important;
+}
+
+.header-about-me-right-image {
   width: 225px;
   height: 250px;
   background-image: url('https://cdn.discordapp.com/attachments/291973336500535298/1142544596161798155/172FCC67-CB96-43D6-8CAF-2AB7FD17D237.jpg');
@@ -121,6 +139,7 @@ a {
 .header-about-me-bold-title {
   font-size: 48px;
   font-weight: 900 !important;
+  width: 100%;
 }
 
 .content-text-title {
@@ -135,7 +154,7 @@ a {
 .footer-left > a {
   width: 40%;
   text-decoration: underline !important;
-  color: wheat !important;
+  color: rgba(255,255,255,0.85) !important;
 }
 
 .footer-right {
@@ -156,7 +175,6 @@ a {
 
 .menu-item:hover {
   cursor: pointer;
-  transform: scale(1.1);
 }
 
 .blog-content-wrapper {
@@ -456,6 +474,14 @@ a {
     margin-top: 10px;
 }
 
+.italic-text {
+  font-style: italic !important;
+}
+
+.content-text-sub > a {
+  text-decoration: underline !important;
+}
+
 @media screen and (max-width: 720px) {
   .footer-right {
     width: 30%;
@@ -463,11 +489,11 @@ a {
 
   .footer-left {
     width: auto;
-    color: wheat !important;
+    color: rgba(255,255,255,0.85) !important;
   }
 
   .footer-left > a, .footer-left > :active, .footer-left > a:visited {
-    color: wheat !important;
+    color: rgba(255,255,255,0.85) !important;
     text-decoration: underline !important;
   }
   
@@ -481,6 +507,10 @@ a {
 
   .header-about-me-left {
     max-width: 85% !important;
+  }
+  
+  .header-about-me-bold-title {
+    width: unset !important;
   }
 }
 
