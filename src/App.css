@@ -483,6 +483,19 @@ a {
   text-decoration: underline !important;
 }
 
+.ant-picker-focused {
+  border-color: var(--burgundy) !important;
+  box-shadow: unset !important;
+}
+
+.ant-picker:hover {
+  border-color: var(--burgundy) !important;
+}
+
+.ant-picker-active-bar {
+  background: black !important;
+}
+
 @media screen and (max-width: 720px) {
   .footer-right {
     width: 30%;
