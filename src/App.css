@@ -412,6 +412,7 @@ a {
 .hamburger-wrapper {
   display: none !important;
   background-color: white;
+  color: black !important;
   position: fixed;
   top: 0;
   left: 100vw;
