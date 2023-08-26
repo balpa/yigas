@@ -6,33 +6,55 @@ import { collection, getDocs } from "firebase/firestore";
 import { useEffect, useState } from 'react';
 import { db } from '../../../firebase'
 
-const menuItems = [
+const items = [
+  // {
+  //   key: '1',
+  //   type: 'group',
+  //   label: 'Group title',
+  //   children: [
+  //     {
+  //       key: '1-1',
+  //       label: '1st menu item',
+  //     },
+  //     {
+  //       key: '1-2',
+  //       label: '2nd menu item',
+  //     },
+  //   ],
+  // },
   {
     key: '1',
-    type: 'group',
-    label: 'Group title',
+    label: 'English',
     children: [
       {
         key: '1-1',
-        label: '1st menu item',
+        label: 'Basketball',
       },
       {
         key: '1-2',
-        label: '2nd menu item',
+        label: 'Behavioral Sciences',
+      },
+      {
+        key: '1-3',
+        label: 'Data Science & Analytics',
       },
     ],
   },
   {
     key: '2',
-    label: 'sub menu',
+    label: 'Türkçe',
     children: [
       {
         key: '2-1',
-        label: '3rd menu item',
+        label: 'Basketbol',
       },
       {
         key: '2-2',
-        label: '4th menu item',
+        label: 'Davranış Bilimleri',
+      },
+      {
+        key: '2-3',
+        label: 'Veri Bilimi & Veri Analitiği',
       },
     ],
   },
@@ -70,10 +92,10 @@ function JournalContent() {
   return (
     <div className='blog-content-wrapper'>
         <div className='blog-content-container'>
-            <Dropdown className='blog-dropdown' menu={{menuItems}}>
+            <Dropdown className='blog-dropdown' menu={{items}}>
                 <a onClick={(e) => e.preventDefault()}>
                 <Space>
-                    Topics
+                    Filter
                     <DownOutlined />
                 </Space>
                 </a>

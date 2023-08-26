@@ -27,16 +27,14 @@ function PostBlog() {
   }
 
   return (
-    <>
-      <div className="main-wrapper">
-        <Header />
-        <div className="quill-wrapper">
-              <ReactQuill theme="snow" value={blogContent} onChange={setBlogContent} />
-        </div>
-        <button className='post-blog-button' onClick={() => !isPostSent && sendPost()}>Post</button>
-        <Footer />
+    <div className="main-wrapper">
+      <Header />
+      <div className="quill-wrapper">
+            <ReactQuill theme="snow" value={blogContent} onChange={setBlogContent} />
       </div>
-    </>
+      <button className='post-blog-button' onClick={() => !isPostSent && sendPost()}>Post</button>
+      <Footer />
+    </div>
   )
 }
 

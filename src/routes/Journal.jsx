@@ -6,9 +6,9 @@ import Footer from '../components/Footer'
 export default function Journal() {
   return (
     <div className="main-wrapper">
-        <Header />
-        <JournalContent />
-        <Footer />
+      <Header />
+      <JournalContent />
+      <Footer />
     </div>
   )
 }

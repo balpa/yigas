@@ -10,7 +10,6 @@ function BlogPostDetailPage() {
   const blogData = location.state;
 
   return (
-    <>
     <div className="main-wrapper">
       <Header />
         <div className='blog-post-detail-page-wrapper'>
@@ -20,7 +19,6 @@ function BlogPostDetailPage() {
         </div>
       <Footer />
     </div>
-    </>
   )
 }
 

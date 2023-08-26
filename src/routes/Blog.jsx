@@ -5,13 +5,11 @@ import BlogContent from '../components/blog/BlogContent'
 
 function Blog() {
   return (
-    <>
-      <div className="main-wrapper">
-        <Header />
-        <BlogContent />
-        <Footer />
-      </div>
-    </>
+    <div className="main-wrapper">
+      <Header />
+      <BlogContent />
+      <Footer />
+    </div>
   )
 }
 
