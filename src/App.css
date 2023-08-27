@@ -308,6 +308,10 @@ a {
   text-align: center !important;
 }
 
+.contact-content-box > form > input + textarea {
+  font-family: 'Ubuntu' !important;
+}
+
 .contact-content-container {
   min-height: calc(100vh - 162px);
   display: flex;
@@ -498,6 +502,11 @@ a {
 
 .ant-picker-active-bar {
   background: black !important;
+}
+
+.email-submit-button {
+  background-color: var(--burgundy) !important;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 720px) {
