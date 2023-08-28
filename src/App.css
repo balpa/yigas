@@ -196,6 +196,7 @@ a {
   border-radius: 4px;
   cursor: pointer;
   transition: 0.5s;
+  overflow: hidden;
 }
 
 .blog-post-wrapper:hover {
@@ -458,11 +459,13 @@ a {
 
 .quill-wrapper {
   width: 80vw;
-  height: calc(100vh - 162px);
+  min-height: calc(100vh - 162px);
 }
 
 .quill {
-  height: 650px;
+  height: 100%;
+  width: 100%;
+  color: black;
   margin-top: 50px;
 }
 
@@ -473,7 +476,7 @@ a {
 }
 
 .blog-post-detail-page-wrapper {
-  height: calc(100vh - 122px);
+  min-height: calc(100vh - 122px);
   width: 900px;
   background-color: white;
   color: black;
@@ -483,6 +486,10 @@ a {
   width: 100%;
   height: 100%;
   text-align: center !important;
+}
+
+p > img {
+  height: 300px !important;
 }
 
 .header-about-me-text {
