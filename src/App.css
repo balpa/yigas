@@ -41,6 +41,7 @@ a {
   font-weight: 900 !important;
   /*transform: scale(1.1);*/
   letter-spacing: 1px;
+  color: white;
 }
 
 .content-wrapper {
@@ -171,10 +172,12 @@ a {
 .menu-item {
   transition: 0.5s;
   will-change: transform;
+  font-size: 21px;
 }
 
 .menu-item:hover {
   cursor: pointer;
+  color: white;
 }
 
 .blog-content-wrapper {
@@ -400,7 +403,7 @@ a {
 .hamburger-icon {
   width: 35px;
   height: 4px;
-  background-color: black;
+  background-color: rgba(255,255,255,0.85);
   margin-bottom: 4px;
 }
 
@@ -433,6 +436,10 @@ a {
 .hamburger-wrapper-active {
   left: 40vw;
   display: block !important;
+}
+
+.hamburger-wrapper-active > .menu-item {
+  color: black;
 }
 
 .hamburger-close-button {
@@ -548,6 +555,7 @@ a {
 
   .mobile-menu-wrapper {
     display: flex !important;
+    justify-content: flex-end !important;
   }
 
   .desktop-menu-wrapper {
