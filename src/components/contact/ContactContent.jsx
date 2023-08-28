@@ -1,5 +1,5 @@
 import '../../App.css'
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import emailjs from '@emailjs/browser';
 
 function ContactContent() {
@@ -9,32 +9,40 @@ function ContactContent() {
   const [subject, setSubject] = useState('')
   const [content, setContent] = useState('')
   const [emailSent, setEmailSent] = useState(false)
+  const [sendButtonText, setSendButtonText] = useState('Send')
+  const [errorMessageStatus, setErrorMessageStatus] = useState(false)
 
   const emailValidationRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+
+  useEffect(() => {
+    setEmailSent(localStorage.getItem('email-sent'))
+  }, [])
 
   const sendEmail = (e) => {
     e.preventDefault();
 
     if (!emailSent && emailValidation()) {
-      emailjs.sendForm('service_4up0xa5', 'template_kn2ghfh', form.current, `${import.meta.env.VITE_EMAIL_KEY}`)
-        .then((result) => {
-          console.log(result.text);
+      emailjs.sendForm(
+        `${import.meta.env.VITE_EMAIL_SERVICE_ID}`,
+        `${import.meta.env.VITE_EMAIL_TEMPLATE_ID}`,
+        form.current,
+        `${import.meta.env.VITE_EMAIL_KEY}`).then((result) => {
+          console.log(`Email sent status: ${result.text}`);
 
-          setEmailSent(true)
-        }, (error) => {
-          console.log(error.text);
-        });
+          localStorage.setItem('email-sent', true);
+
+          setSendButtonText('Email Sent!')
+          setErrorMessageStatus(false)
+        }, (error) => console.log(error.text));
+    } else {
+      setErrorMessageStatus(true)
+
+      console.log('email already sent or not valid!')
     }
   };
 
-  const emailValidation = () => {
-    const isEmailEmpty = email === ''
-    const isEmailValid = emailValidationRegex.test(email)
-    const isSubjectEmpty = subject === ''
-    const isContentEmpty = content === ''
-
-    return !isEmailEmpty && !isSubjectEmpty && !isContentEmpty && isEmailValid
-  }
+  //additional validation needed
+  const emailValidation = () => email !== '' && subject !== '' && content !== '' && emailValidationRegex.test(email)
 
   return (
     <div className='contact-content-wrapper'>
@@ -66,9 +74,9 @@ function ContactContent() {
               maxLength={1000}
               onChange={(e) => setContent(e.target.value)}
             ></textarea>
-            <input className="email-submit-button" type='submit' value='Send' />
+            <input className="email-submit-button" type='submit' value={`${sendButtonText}`} />
           </form>
-          {/* <button className='contact-content-email-send-button'>Send</button> */}
+          {errorMessageStatus && <div style={{color: 'red', textAlign: 'center', width: '100%'}}>Email already sent or not valid!</div>}
         </div>
       </div>
     </div>
