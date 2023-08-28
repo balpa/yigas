@@ -1,37 +1,24 @@
 import '../App.css'
-import { useState, useEffect } from 'react';
-import { collection, addDoc, getDocs } from "firebase/firestore";
+import { useState } from 'react';
+import { collection, addDoc } from "firebase/firestore";
 import { db } from '../../firebase';
 import { useNavigate } from 'react-router-dom';
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 function Admin() {
   const [postText, setPostText] = useState('')
   const [password, setPassword] = useState('')
-  const [adminPassword, setAdminPassword] = useState(undefined)
-  const [passwordMatched, setPasswordMatched] = useState(false)
-  const [isDataFetched, setIsDataFetched] = useState(false)
+  const [email, setEmail] = useState('')
   const [isPostSent, setIsPostSent] = useState(false)
 
   const navigate = useNavigate();
+  const auth = getAuth();
 
-  useEffect(() => {
-    const fetchPosts = async () => {
-      if (!isDataFetched) {
-        const querySnapshot = await getDocs(collection(db, "admin-password"));
-        querySnapshot.forEach((doc) => setAdminPassword(doc.data().password));
-  
-        setIsDataFetched(true)
-      }
-    }
-  
-    fetchPosts()
-  }, [])
-
-  useEffect(() => {
-    if (!passwordMatched && (password === adminPassword)) {
-      setPasswordMatched(true)
-    }
-  }, [password])
+  const signIn = () => {
+    signInWithEmailAndPassword(auth, email, password)
+      .then(() => console.log('Logged in!'))
+      .catch((error) => console.log(`error code: ${error.code}, error message: ${error.message}`));
+  }
 
   const sendPost = async () => {
     if (isValid) {
@@ -55,12 +42,18 @@ function Admin() {
   return (
     <div className='admin-page-wrapper'>
       <div className='admin-page-container'>
-          {!passwordMatched && <input className='admin-page-password' onChange={(e) => setPassword(e.target.value)}></input>}
-          {passwordMatched && (<>
+          {!auth ? (
+            <>
+            <input className='admin-page-email' onChange={(e) => setEmail(e.target.value)}></input>
+            <input className='admin-page-password' onChange={(e) => setPassword(e.target.value)}></input>
+            <button className='admin-page-sign-in-button' onClick={signIn}>Sign In</button>
+            </>
+          ) : (
+            <>
             <textarea className='admin-post-text' onChange={(e) => setPostText(e.target.value)}/>
             <button className='admin-post-button' onClick={sendPost}>Post</button>
             {isPostSent && <button onClick={() => navigate('/journal')}>See posts</button>}
-          </>)}
+            </>)}
       </div>
     </div>
   )
