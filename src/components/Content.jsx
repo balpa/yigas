@@ -21,7 +21,7 @@ function Content() {
     },
     {
       title: 'Python for Data Science & ML',
-      text: 'In lab and academia (social sciences), researchers mainly use statistical softwares such as JASP, Jamovi, SPSS. R programming is also used but during those times I started to lose a bit interest in academia due to different reasons. So, I wanted to learn Python. I attended a <a href="https://miuul.com/" target="_blank">Data Science & Machine Learning Bootcamp</a> which mainly helped me with programming skills along with industry-based cases rather than theoretical part since I was already done with the classic: <a class="italic-text" href="https://www.statlearning.com" target="_blank">Introduction to Statistical Learning.</a>'
+      text: 'In lab and academia (social sciences), researchers mainly use statistical softwares such as JASP, Jamovi, SPSS. R programming is also used but during those times I started to lose a bit interest in academia due to different reasons. So, I wanted to learn Python. I attended a <a href="https://miuul.com/" target="_blank">Data Science & Machine Learning Bootcamp</a> which mainly helped me with programming skills along with industry-based cases rather than theoretical part since I was already done with the classic (up to deep learning): <a class="italic-text" href="https://www.statlearning.com" target="_blank">Introduction to Statistical Learning.</a>'
     },
     {
       title: 'Data Science Internship',

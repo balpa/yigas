@@ -13,6 +13,7 @@ function Admin() {
 
   const navigate = useNavigate();
   const auth = getAuth();
+  const user = auth.currentUser;
 
   const signIn = () => {
     signInWithEmailAndPassword(auth, email, password)
@@ -42,7 +43,7 @@ function Admin() {
   return (
     <div className='admin-page-wrapper'>
       <div className='admin-page-container'>
-          {!auth ? (
+          {!user ? (
             <>
             <input className='admin-page-email' onChange={(e) => setEmail(e.target.value)}></input>
             <input className='admin-page-password' onChange={(e) => setPassword(e.target.value)}></input>
