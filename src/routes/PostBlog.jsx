@@ -41,21 +41,27 @@ const formats = [
 ];
 
 function PostBlog() {
-  const [blogContent, setBlogContent] = useState('');
+  const [blogTitle, setBlogTitle] = useState('')
+  const [blogTags, setBlogTags] = useState('')
+  const [blogContent, setBlogContent] = useState('')
   const [isPostSent, setIsPostSent] = useState(false)
   const [postButtonText, setPostButtonText] = useState('Post')
 
   const sendPost = async () => {
       try {
-        const docRef = await addDoc(collection(db, 'blog'), {
-          text: blogContent,
-          date: Date.now(),
-        });
-
-        setIsPostSent(true)
-        setPostButtonText('Post sent!')
-
-        console.log('Document written with ID: ', docRef.id);
+        if (blogTitle !== '' && blogTags !== '') {
+          await addDoc(collection(db, 'blog'), {
+            text: blogContent,
+            title: blogTitle,
+            tags: blogTags,
+            date: Date.now(),
+          });
+          
+          setIsPostSent(true)
+          setPostButtonText('Post sent!')
+          
+          console.log('Document written! ');
+        } else {console.log('Title or tag inputs empty')}
       } catch (e) {
         console.error('Error adding document: ', e);
       }
@@ -64,6 +70,8 @@ function PostBlog() {
   return (
     <div className="main-wrapper">
       <Header />
+      <input className='blog-title-input' type='text' placeholder='title' onChange={(e) => {setBlogTitle(e.target.value)}}></input>
+      <input className='blog-tag-input' type='text' placeholder='tags' onChange={(e) => {setBlogTags(e.target.value)}}></input>
       <div className="quill-wrapper">
         <ReactQuill
           theme="snow"

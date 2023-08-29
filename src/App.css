@@ -15,6 +15,14 @@ a {
   color: black !important;
 }
 
+.ql-align-center {
+  text-align: center !important;
+}
+
+.ql-align-justify {
+  text-align: justify !important;
+}
+
 .main-wrapper {
   width: 99.99vw;
   min-height: 100vh;
@@ -199,8 +207,16 @@ a {
   overflow: hidden;
 }
 
+.blog-post-detail-page-container {
+  padding: 70px;
+}
+
 .blog-post-wrapper:hover {
   transform: scale(1.04);
+}
+
+.blog-post-container {
+  padding: 0px 15px 15px 15px;
 }
 
 .blog-posts-container {
@@ -211,6 +227,14 @@ a {
   justify-content: center;
   align-items: center;
   margin-top: 100px;
+}
+
+.blog-post-title {
+  text-align: center;
+  font-weight: bold;
+  font-size: 36px;
+  word-break: break-all;
+  padding: 15px;
 }
 
 .blog-dropdown {
@@ -488,8 +512,12 @@ a {
   text-align: center !important;
 }
 
+.blog-post-container {
+  word-break: break-all;
+}
+
 p > img {
-  height: 300px !important;
+  height: 200px !important;
 }
 
 .header-about-me-text {
@@ -521,6 +549,14 @@ p > img {
 .email-submit-button {
   background-color: var(--burgundy) !important;
   cursor: pointer;
+}
+
+.blog-title-input, .blog-tag-input {
+  background-color: white;
+  color: black;
+  margin-top: 10px;
+  width: 400px;
+  height: 25px;
 }
 
 @media screen and (max-width: 720px) {
