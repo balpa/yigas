@@ -10,6 +10,7 @@ function Admin() {
   const [password, setPassword] = useState('')
   const [email, setEmail] = useState('')
   const [isPostSent, setIsPostSent] = useState(false)
+  const [isLoggedIn, setIsLoggedin] = useState(false)
 
   const navigate = useNavigate();
   const auth = getAuth();
@@ -17,7 +18,11 @@ function Admin() {
 
   const signIn = () => {
     signInWithEmailAndPassword(auth, email, password)
-      .then(() => console.log('Logged in!'))
+      .then(() => {
+        setIsLoggedin(true)
+
+        console.log('Logged in status: ' + isLoggedIn)
+      })
       .catch((error) => console.log(`error code: ${error.code}, error message: ${error.message}`));
   }
 

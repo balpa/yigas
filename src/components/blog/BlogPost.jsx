@@ -9,7 +9,7 @@ function BlogPost({blogData}) {
   const openBlogDetailsPage = () => {
     navigate(`/blog/${(blogData.title || blogData.date)}`, {state: blogData});
   }
-  console.log(blogData)
+
   return (
     <div className='blog-post-wrapper' onClick={() => openBlogDetailsPage()}>
         <div className='blog-post-title'>{(blogData.title || '')}</div>
