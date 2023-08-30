@@ -3,8 +3,12 @@ import PropTypes from 'prop-types';
 import ReactHtmlParser from 'react-html-parser';
 
 function Post({post}) {
-  const clock = new Date(post.date).toLocaleString('en-US').split(',')[1]
   const date = new Date(post.date).toLocaleString('en-US').split(',')[0]
+  let clock = new Date(post.date).toLocaleString('en-US').split(',')[1].trim()
+  const clockArr = clock.split(' ')
+  const amOrPmVal = clockArr[1]
+  clock = clockArr[0].slice(0,-3) + ' ' + amOrPmVal
+
 
   return (
     <div className='journal-post-wrapper'>

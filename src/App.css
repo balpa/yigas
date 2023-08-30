@@ -313,15 +313,15 @@ a {
 
 .journal-post-date {
   position: absolute;
-  top: 2px;
-  right: 5px;
+  top: 5px;
+  right: 9px;
   font-size: 10px;
 }
 
 .journal-post-clock {
   position: absolute;
-  top: 2px;
-  left: 5px;
+  top: 5px;
+  left: 9px;
   font-size: 10px;
 }
 
