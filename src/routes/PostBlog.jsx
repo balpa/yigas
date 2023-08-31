@@ -48,6 +48,7 @@ function PostBlog() {
   const [isPostSent, setIsPostSent] = useState(false)
   const [postButtonText, setPostButtonText] = useState('Post')
   const [blogThumbnailText, setBlogThumbnailText] = useState('')
+  const [blogThumbnailImage, setBlogThumbnailImage] = useState('')
 
   const sendPost = async () => {
       try {
@@ -57,6 +58,7 @@ function PostBlog() {
             title: blogTitle,
             tags: blogTags,
             thumbnailText: blogThumbnailText,
+            thumbnailImage: blogThumbnailImage,
             date: Date.now(),
           });
           
@@ -76,7 +78,7 @@ function PostBlog() {
       <input className='blog-title-input' type='text' placeholder='title' onChange={(e) => {setBlogTitle(e.target.value)}}></input>
       <input className='blog-tag-input' type='text' placeholder='tags' onChange={(e) => {setBlogTags(e.target.value)}}></input>
       <input className='blog-thumbnail-text-input' type='text' placeholder='thumbnail text' onChange={(e) => {setBlogThumbnailText(e.target.value)}}></input>
-      <UploadImage />
+      <UploadImage setBlogThumbnailImage={setBlogThumbnailImage}/>
       <div className="quill-wrapper">
         <ReactQuill
           theme="snow"
