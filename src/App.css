@@ -551,12 +551,21 @@ p > img {
   cursor: pointer;
 }
 
-.blog-title-input, .blog-tag-input {
+.blog-title-input, .blog-tag-input, .blog-thumbnail-text-input {
   background-color: white;
   color: black;
   margin-top: 10px;
   width: 400px;
   height: 25px;
+}
+
+.image-uploader-wrapper {
+  color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 }
 
 @media screen and (max-width: 720px) {

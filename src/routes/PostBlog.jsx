@@ -6,6 +6,7 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { collection, addDoc } from "firebase/firestore";
 import { db } from '../../firebase';
+import UploadImage from '../components/UploadImage';
 
 const modules = {
   toolbar: [
@@ -46,6 +47,7 @@ function PostBlog() {
   const [blogContent, setBlogContent] = useState('')
   const [isPostSent, setIsPostSent] = useState(false)
   const [postButtonText, setPostButtonText] = useState('Post')
+  const [blogThumbnailText, setBlogThumbnailText] = useState('')
 
   const sendPost = async () => {
       try {
@@ -54,6 +56,7 @@ function PostBlog() {
             text: blogContent,
             title: blogTitle,
             tags: blogTags,
+            thumbnailText: blogThumbnailText,
             date: Date.now(),
           });
           
@@ -72,6 +75,8 @@ function PostBlog() {
       <Header />
       <input className='blog-title-input' type='text' placeholder='title' onChange={(e) => {setBlogTitle(e.target.value)}}></input>
       <input className='blog-tag-input' type='text' placeholder='tags' onChange={(e) => {setBlogTags(e.target.value)}}></input>
+      <input className='blog-thumbnail-text-input' type='text' placeholder='thumbnail text' onChange={(e) => {setBlogThumbnailText(e.target.value)}}></input>
+      <UploadImage />
       <div className="quill-wrapper">
         <ReactQuill
           theme="snow"
