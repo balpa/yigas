@@ -63,6 +63,33 @@ const items = [
 function JournalContent() {
   const [isDataFetched, setIsDataFetched] = useState(false)
   const [blogData, setBlogData] = useState([])
+  const [filteredData, setFilteredData] = useState([])
+  const [filter, setFilter] = useState('')
+
+  useEffect(() => {
+    const submenuClicksInterval = setInterval(() => {
+      const submenu = document.querySelector('div.ant-dropdown-menu-submenu')
+
+      if(submenu) { 
+        document.querySelectorAll('div.ant-dropdown-menu-submenu > ul > li').forEach(($node) => {
+          $node.addEventListener('click', (e) => {
+            setFilter(e.target.innerText)
+          })
+        })
+      }
+    }, 500)
+
+    return () => clearInterval(submenuClicksInterval)
+  }, [])
+
+  useEffect(() => {
+    const filtered = blogData.filter((blogPost) => {
+      const tags = blogPost.tags && (blogPost.tags.toLowerCase() || {}).split(',')
+      return (tags || []).includes(filter.toLowerCase())
+    })
+
+    setFilteredData(filtered)
+  }, [filter])
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -89,11 +116,14 @@ function JournalContent() {
     });
   }
 
+  const renderPosts = (data) => data.map((data, index) => <BlogPost blogData={data} key={index} />)
+
   return (
     <div className='blog-content-wrapper'>
         <div className='blog-content-container'>
-            <Dropdown className='blog-dropdown' menu={{items}}>
-                <a onClick={(e) => e.preventDefault()}>
+            {filter && <div className='blog-content-clear-filter' onClick={() => {setFilter('')}}>Clear filter</div>}
+            <Dropdown className='blog-dropdown' menu={{items}} onClick={(e) => {console.log(e)}}>
+                <a>
                 <Space>
                     Filter
                     <DownOutlined />
@@ -101,7 +131,9 @@ function JournalContent() {
                 </a>
             </Dropdown>
             <div className="blog-posts-container">
-              {blogData && blogData.map((data, index) => <BlogPost blogData={data} key={index} />)}
+              {filteredData.length
+              ? renderPosts(filteredData)
+              : filter && !filteredData.length ? <div>No data!</div> : renderPosts(blogData)}
             </div>
         </div>
     </div>

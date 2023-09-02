@@ -4,6 +4,8 @@ import { collection, addDoc } from "firebase/firestore";
 import { db } from '../../firebase';
 import { useNavigate } from 'react-router-dom';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import Header from '../components/Header'
+import Footer from '../components/Footer'
 
 function Admin() {
   const [postText, setPostText] = useState('')
@@ -46,6 +48,8 @@ function Admin() {
   const isValid = (string) => string.length
 
   return (
+    <>
+    <Header />  
     <div className='admin-page-wrapper'>
       <div className='admin-page-container'>
           {!user ? (
@@ -62,6 +66,8 @@ function Admin() {
             </>)}
       </div>
     </div>
+    <Footer />
+    </>
   )
 }
 

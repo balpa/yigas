@@ -9,6 +9,8 @@ function BlogPostDetailPage() {
   const location = useLocation();
   const blogData = location.state;
 
+  const date = new Date(blogData.date).toLocaleString('en-US').split(',')[0]
+
   return (
     <div className="main-wrapper">
       <Header />
@@ -16,6 +18,7 @@ function BlogPostDetailPage() {
           <div className='blog-post-detail-page-container'>
             {ReactHtmlParser(blogData.text)}
           </div>
+          <div className='blog-post-detail-page-date'>{date}</div>
         </div>
       <Footer />
     </div>
