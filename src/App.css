@@ -571,7 +571,7 @@ p > img {
   cursor: pointer;
 }
 
-.blog-title-input, .blog-tag-input, .blog-thumbnail-text-input {
+.blog-title-input, .blog-tag-input, .blog-thumbnail-text-input, .blog-thumbnail-url-input {
   background-color: white;
   color: black;
   margin-top: 10px;

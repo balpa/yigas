@@ -7,7 +7,7 @@ function BlogPost({blogData}) {
   const navigate = useNavigate();
 
   const openBlogDetailsPage = () => {
-    navigate(`/blog/${(blogData.title || blogData.date)}`, {state: blogData});
+    navigate(`/blog/${(blogData.url || blogData.date)}`, {state: blogData});
   }
 
   return (

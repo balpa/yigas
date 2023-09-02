@@ -118,6 +118,8 @@ function JournalContent() {
 
   const renderPosts = (data) => data.map((data, index) => <BlogPost blogData={data} key={index} />)
 
+  const NoData = () => <div>No data!</div>
+
   return (
     <div className='blog-content-wrapper'>
         <div className='blog-content-container'>
@@ -133,7 +135,7 @@ function JournalContent() {
             <div className="blog-posts-container">
               {filteredData.length
               ? renderPosts(filteredData)
-              : filter && !filteredData.length ? <div>No data!</div> : renderPosts(blogData)}
+              : filter && !filteredData.length ? <NoData /> : !blogData.length ? <NoData /> : renderPosts(blogData)}
             </div>
         </div>
     </div>
