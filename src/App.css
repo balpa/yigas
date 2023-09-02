@@ -286,7 +286,6 @@ a {
   border: 1px solid black;
   border-radius: 10px;
   width: 90%;
-  min-height: 100px;
   padding: 25px 10px 10px 10px;
   position: relative;
 }
