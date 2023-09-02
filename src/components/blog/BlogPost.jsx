@@ -14,7 +14,8 @@ function BlogPost({blogData}) {
     <div className='blog-post-wrapper' onClick={() => openBlogDetailsPage()}>
         <div className='blog-post-title'>{(blogData.title || '')}</div>
         <div className='blog-post-container'>
-          {ReactHtmlParser(blogData.text)}
+          <img className='blog-post-thumbnail-image' src={blogData.thumbnailImage}></img>
+          <div className='blog-post-thumbnail-text'>{ReactHtmlParser(blogData.thumbnailText)}</div>
         </div>
     </div>
   )
