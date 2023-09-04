@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import '../../App.css'
 import Post from './Post';
 import { useState, useEffect } from 'react';
@@ -106,10 +107,11 @@ function JournalContent() {
 
   const checkIsEmptyFeed = () => {
     if ((value || []).length) {
-      if (!dateFilteredPostsData.length) setIsFeedEmpty(true)
+      if (dateFilteredPostsData.length == 0) setIsFeedEmpty(true)
     }
     else setIsFeedEmpty(false)
-  }
+}
+  console.log(isFeedEmpty)
 
   const disabledDate = (current) => {
     if (!dates) return false;
@@ -139,7 +141,7 @@ function JournalContent() {
   }
 
   const renderPosts = (data) => data && data.map((post, index) => <Post post={post} key={index}/>)
-
+  console.log(dateFilteredPostsData)
   return (
     <div className='journal-content-wrapper'>
         <div className='journal-content-container'>
@@ -158,7 +160,7 @@ function JournalContent() {
               />
             </div>
           </div>
-          {!postsToRender.length ? renderPosts(postsData) : renderPosts(postsToRender)}
+          {isFeedEmpty ? <div>No data available!</div> : !postsToRender.length ? renderPosts(postsData) : renderPosts(postsToRender)}
           {/* {(dateFilteredPostsData || []).length
             ? renderPosts(dateFilteredPostsData)
             : isFeedEmpty ? <div>No data available!</div> : renderPosts(postsData)} */}

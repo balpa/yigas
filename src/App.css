@@ -620,6 +620,7 @@ p > img {
   cursor: pointer;
 }
 
+
 @media screen and (max-width: 900px) {
   .journal-content-container, .blog-content-container {
     width: 100%;
