@@ -3,7 +3,7 @@ import Post from './Post';
 import { useState, useEffect } from 'react';
 import { collection, getDocs } from "firebase/firestore";
 import { db } from '../../../firebase';
-import { DatePicker } from 'antd';
+import { DatePicker, Segmented } from 'antd';
 import dayjs from 'dayjs';
 
 function JournalContent() {
@@ -16,35 +16,7 @@ function JournalContent() {
   const [isFeedEmpty, setIsFeedEmpty] = useState(false)
   const [dates, setDates] = useState(null);
   const [value, setValue] = useState([]);
-
-  useEffect(() => {
-      let startDate = new Date(((value || [])[0] || {})['$d']).getTime() 
-      let endDate = new Date(((value || [])[1] || {})['$d']).getTime()
-
-      startDate = dayjs(startDate).startOf('day')
-      endDate = dayjs(endDate).endOf('day')
-
-      filterPostsDataByDate(startDate, endDate)
-
-      checkIsEmptyFeed()
-  }, [value])
-
-  const filterPostsDataByDate = (startDate, endDate) => {
-    const filteredData = postsData.filter((postObj) => {
-      if (!!startDate && !!endDate) {
-        return (postObj.date < endDate) && (postObj.date > startDate)
-      }
-    })
-
-    setDateFilteredPostsData(filteredData)
-  }
-
-  const checkIsEmptyFeed = () => {
-    if ((value || []).length) {
-      if (!dateFilteredPostsData.length) setIsFeedEmpty(true)
-    }
-    else setIsFeedEmpty(false)
-  }
+  const [languageFilter, setLanguageFilter] = useState('BOTH')
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -61,6 +33,65 @@ function JournalContent() {
   
     fetchPosts()
   }, [])
+
+  useEffect(() => {
+      let startDate = new Date(((value || [])[0] || {})['$d']).getTime() 
+      let endDate = new Date(((value || [])[1] || {})['$d']).getTime()
+
+      startDate = dayjs(startDate).startOf('day')
+      endDate = dayjs(endDate).endOf('day')
+
+      filterPostsDataByDate(startDate, endDate)
+
+      if (postsData) {
+        const data = filterPostsByLanguage(postsData)
+
+        setPostsData(data)
+      } else if (dateFilteredPostsData) {
+        const data = filterPostsByLanguage(dateFilteredPostsData)
+
+        setDateFilteredPostsData(data)
+      }
+  
+      checkIsEmptyFeed()
+  }, [value, languageFilter])
+
+  console.log('DATE: ', dateFilteredPostsData)
+  console.log('ori: ', postsData)
+
+  const filterPostsDataByDate = (startDate, endDate) => {
+    const filteredData = postsData && postsData.filter((postObj) => {
+      if (!!startDate && !!endDate) {
+        return (postObj.date < endDate) && (postObj.date > startDate)
+      }
+    })
+
+    setDateFilteredPostsData(filteredData)
+  }
+
+  const filterPostsByLanguage = (data) => {
+
+    const filteredData = data && data.filter((postObj) => {
+      let result;
+
+      if (postObj.selectedLanguage) {
+        const filter = languageFilter === 'TR' ? 'turkish' : languageFilter === 'EN' ? 'english' : languageFilter === 'BOTH' ? 'both' : null
+
+        result = postObj.selectedLanguage.toLowerCase() === filter
+      } 
+      debugger
+      return result
+    })
+
+    setDateFilteredPostsData(filteredData)
+  }
+
+  const checkIsEmptyFeed = () => {
+    if ((value || []).length) {
+      if (!dateFilteredPostsData.length) setIsFeedEmpty(true)
+    }
+    else setIsFeedEmpty(false)
+  }
 
   const disabledDate = (current) => {
     if (!dates) return false;
@@ -89,13 +120,14 @@ function JournalContent() {
     });
   }
 
-  const renderPosts = (data) => data.map((post, index) => <Post post={post} key={index}/>)
+  const renderPosts = (data) => data && data.map((post, index) => <Post post={post} key={index}/>)
 
   return (
     <div className='journal-content-wrapper'>
         <div className='journal-content-container'>
           <div className='journal-content-quote'>&quot;A wise man, therefore, proportions his belief to the evidence.&quot;</div>
           <div className='journal-content-title'>my 2 cents</div>
+          <Segmented options={['EN', 'BOTH', 'TR']} value={languageFilter} defaultValue='BOTH' onChange={setLanguageFilter} />
           <div className='journal-content-filter-wrapper'>
             <div className='journal-content-date-filter-wrapper'>
               <RangePicker
@@ -108,7 +140,7 @@ function JournalContent() {
               />
             </div>
           </div>
-          {dateFilteredPostsData.length
+          {(dateFilteredPostsData || []).length
             ? renderPosts(dateFilteredPostsData)
             : isFeedEmpty ? <div>No data available!</div> : renderPosts(postsData)}
         </div>
