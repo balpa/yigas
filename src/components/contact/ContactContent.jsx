@@ -10,6 +10,7 @@ function ContactContent() {
   const [content, setContent] = useState('')
   const [emailSent, setEmailSent] = useState(false)
   const [sendButtonText, setSendButtonText] = useState('Send')
+  const [sendButtonColor, setSendButtonColor] = useState('#800020')
   const [errorMessageStatus, setErrorMessageStatus] = useState(false)
 
   const emailValidationRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
@@ -32,6 +33,7 @@ function ContactContent() {
           localStorage.setItem('email-sent', true);
 
           setSendButtonText('Email Sent!')
+          setSendButtonColor('green')
           setErrorMessageStatus(false)
         }, (error) => console.log(error.text));
     } else {
@@ -74,7 +76,7 @@ function ContactContent() {
               maxLength={1000}
               onChange={(e) => setContent(e.target.value)}
             ></textarea>
-            <input className="email-submit-button" type='submit' value={`${sendButtonText}`} />
+            <input className="email-submit-button" type='submit' value={`${sendButtonText}`} style={{backgroundColor: sendButtonColor}} />
           </form>
           {errorMessageStatus && <div style={{color: 'red', textAlign: 'center', width: '100%'}}>Email already sent or not valid!</div>}
         </div>

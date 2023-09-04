@@ -1,5 +1,6 @@
 import '../App.css'
 import EachContent from './content/EachContent'
+import { motion } from 'framer-motion'
 
 function Content() {
   const contents = [
@@ -39,9 +40,10 @@ function Content() {
 
   return (
     <div className="content-wrapper">
-      <div className="content-container">
+      <motion.div
+        className="content-container">
         {contents.map((content, index) => <EachContent key={index} content={content}/>)}
-      </div>
+      </motion.div>
     </div>
   )
 }

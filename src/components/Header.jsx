@@ -9,7 +9,7 @@ function Header({isHomePage}) {
   const { scrollYProgress } = useScroll();
   const dynamicHeight = useTransform(
     scrollYProgress,
-    [0, 0.1],
+    isHomePage ? [0, 0.1] : [0, 1],
     [80, 35]
   )
   const dynamicMargin = useTransform(
@@ -23,7 +23,7 @@ function Header({isHomePage}) {
 
   return (
     <>
-    <motion.div style={isHomePage && {height: dynamicHeight}} className="header-menu">
+    <motion.div style={{height: dynamicHeight}} className="header-menu">
       <div className="desktop-menu-wrapper">
         {/* <Logo /> */}
         <MenuItem name={'About'}/>
