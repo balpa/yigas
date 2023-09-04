@@ -13,6 +13,7 @@ function Admin() {
   const [email, setEmail] = useState('')
   const [isPostSent, setIsPostSent] = useState(false)
   const [isLoggedIn, setIsLoggedin] = useState(false)
+  const [language, setLanguage] = useState('')
 
   const navigate = useNavigate();
   const auth = getAuth();
@@ -33,6 +34,7 @@ function Admin() {
       try {
         const docRef = await addDoc(collection(db, 'posts'), {
           text: postText,
+          selectedLanguage: language,
           date: Date.now(),
         });
 
@@ -45,7 +47,7 @@ function Admin() {
     }
   }
 
-  const isValid = (string) => string.length
+  const isValid = (string) => string.length > 0 && string.length < 500
 
   return (
     <>
@@ -60,6 +62,11 @@ function Admin() {
             </>
           ) : (
             <>
+            <label htmlFor='languages'>Select language</label>
+            <select name="languages" id="admin-journal-post-language-input" onChange={(e) => {setLanguage(e.target.value)}}>
+              <option value="english">English</option>
+              <option value="turkish">Turkish</option>
+            </select>
             <textarea className='admin-post-text' onChange={(e) => setPostText(e.target.value)}/>
             <button className='admin-post-button' onClick={sendPost}>Post</button>
             {isPostSent && <button onClick={() => navigate('/journal')}>See posts</button>}
