@@ -45,39 +45,73 @@ function JournalContent() {
       endDate = dayjs(endDate).endOf('day')
 
       filterPostsDataByDate(startDate, endDate)
-      checkIsEmptyFeed()
   }, [value])
 
   useEffect(() => {
-    if (languageFilter !== 'BOTH') {
-      if ((dateFilteredPostsData || []).length) {
-        filterPostsByLanguage(dateFilteredPostsData)
-      } else if ((postsData || []).length) {
-        filterPostsByLanguage(postsData)
-      }
-    } else {
-      setPostsToRender(postsData)
-    }
+    const filteredData = filterPostsDataByLanguage()
+
+    setLanguageFilteredPostsData(filteredData)
   }, [languageFilter])
 
-  useEffect(() => {
-    if (languageFilteredPostsData.length) {
-      if (!dateFilteredPostsData.length){
-        setPostsToRender(languageFilteredPostsData)
-      } else if (dateFilteredPostsData.length) {
-        const data = dateFilteredPostsData.filter((postObj) => {
-          let result;
-          const filter = languageFilter === 'TR' ? 'turkish' : languageFilter === 'EN' ? 'english' : languageFilter === 'BOTH' ? 'both' : null
+  // useEffect(() => {
+  //   if (languageFilter !== 'BOTH') {
+  //     if ((dateFilteredPostsData || []).length) {
+  //       filterPostsByLanguage(dateFilteredPostsData)
+  //     } else if ((postsData || []).length) {
+  //       filterPostsByLanguage(postsData)
+  //     }
+  //   } else {
+  //     setPostsToRender(postsData)
+  //   }
+  // }, [languageFilter])
 
-          result = postObj.selectedLanguage.toLowerCase() === filter
+  // useEffect(() => {
+  //   if (languageFilteredPostsData.length) {
+  //     if (!dateFilteredPostsData.length){
+  //       setPostsToRender(languageFilteredPostsData)
+  //     } else if (dateFilteredPostsData.length) {
+  //       const data = dateFilteredPostsData.filter((postObj) => {
+  //         let result;
+  //         const filter = languageFilter === 'TR' ? 'turkish' : languageFilter === 'EN' ? 'english' : languageFilter === 'BOTH' ? 'both' : null
 
-          return result
-        })
+  //         result = postObj.selectedLanguage.toLowerCase() === filter
 
-        setPostsToRender(data)
-      }
+  //         return result
+  //       })
+
+  //       checkIsEmptyFeed()
+  //       setPostsToRender(data)
+  //     }
+  //   }
+  // }, [postsData, dateFilteredPostsData, languageFilteredPostsData])
+
+  const filterPostsDataByLanguage = () => {
+    let res
+
+    if (!dateFilteredPostsData.length) {
+      const filteredData = (postsData || []).filter((postObj) => {
+        const lang = postObj.selectedLanguage.toLowerCase()
+        const filter = languageFilter === 'TR' ? 'turkish' : languageFilter === 'EN' ? 'english' : languageFilter === 'BOTH' ? 'both' : null
+
+        return filter === 'both' ? true : lang === filter
+      })
+
+      res = filteredData
+    } else if (dateFilteredPostsData.length) {
+      const filteredData = (dateFilteredPostsData || []).filter((postObj) => {
+        const lang = postObj.selectedLanguage.toLowerCase()
+        const filter = languageFilter === 'TR' ? 'turkish' : languageFilter === 'EN' ? 'english' : languageFilter === 'BOTH' ? 'both' : null
+
+        return filter === 'both' ? true : lang === filter
+      })
+
+      res = filteredData
     }
-  }, [postsData, dateFilteredPostsData, languageFilteredPostsData])
+
+    return res
+  }
+
+  console.log(languageFilteredPostsData)
 
   const filterPostsDataByDate = (startDate, endDate) => {
     const filteredData = (postsData || []).filter((postObj) => {
@@ -87,24 +121,25 @@ function JournalContent() {
     })
 
     setDateFilteredPostsData(filteredData)
+    checkIsEmptyFeed()
   }
 
-  const filterPostsByLanguage = (data) => {
-    const filteredData = data && data.filter((postObj) => {
-      let result;
+  // const filterPostsByLanguage = (data) => {
+  //   const filteredData = (data || []).filter((postObj) => {
+  //     let result;
 
-      if (postObj.selectedLanguage) {
-        const lang = postObj.selectedLanguage.toLowerCase()
-        const filter = languageFilter === 'TR' ? 'turkish' : languageFilter === 'EN' ? 'english' : languageFilter === 'BOTH' ? 'both' : null
+  //     if (postObj.selectedLanguage) {
+  //       const lang = postObj.selectedLanguage.toLowerCase()
+  //       const filter = languageFilter === 'TR' ? 'turkish' : languageFilter === 'EN' ? 'english' : languageFilter === 'BOTH' ? 'both' : null
 
-        result = filter === 'both' ? true : lang === filter
-      } 
+  //       result = filter === 'both' ? true : lang === filter
+  //     } 
 
-      return result
-    })
+  //     return result
+  //   })
 
-    setLanguageFilteredPostsData(filteredData)
-  }
+  //   setLanguageFilteredPostsData(filteredData)
+  //}
 
   const checkIsEmptyFeed = () => {
     if ((value || []).length) {
@@ -112,7 +147,6 @@ function JournalContent() {
     }
     else setIsFeedEmpty(false)
 }
-  console.log('is feed empty: ', isFeedEmpty)
 
   const disabledDate = (current) => {
     if (!dates) return false;
@@ -142,7 +176,7 @@ function JournalContent() {
   }
 
   const renderPosts = (data) => data && data.map((post, index) => <Post post={post} key={index}/>)
-  console.log('date filtered poststtsts: ', dateFilteredPostsData)
+  //console.log('date filtered poststtsts: ', dateFilteredPostsData)
   return (
     <div className='journal-content-wrapper'>
         <div className='journal-content-container'>
@@ -161,10 +195,10 @@ function JournalContent() {
               />
             </div>
           </div>
-          {isFeedEmpty ? <div>No data available!</div> : !postsToRender.length ? renderPosts(postsData) : renderPosts(postsToRender)}
-          {/* {(dateFilteredPostsData || []).length
+          {/*isFeedEmpty ? <div>No data available!</div> : !postsToRender.length ? renderPosts(postsData) : renderPosts(postsToRender)*/}
+          {(dateFilteredPostsData || []).length
             ? renderPosts(dateFilteredPostsData)
-            : isFeedEmpty ? <div>No data available!</div> : renderPosts(postsData)} */}
+            : isFeedEmpty ? <div>No data available!</div> : renderPosts(postsData)}
         </div>
     </div>
   )
