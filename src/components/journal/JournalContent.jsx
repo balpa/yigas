@@ -80,7 +80,7 @@ function JournalContent() {
   }, [postsData, dateFilteredPostsData, languageFilteredPostsData])
 
   const filterPostsDataByDate = (startDate, endDate) => {
-    const filteredData = postsData && postsData.filter((postObj) => {
+    const filteredData = (postsData || []).filter((postObj) => {
       if (!!startDate && !!endDate) {
         return (postObj.date < endDate) && (postObj.date > startDate)
       }
@@ -94,9 +94,10 @@ function JournalContent() {
       let result;
 
       if (postObj.selectedLanguage) {
+        const lang = postObj.selectedLanguage.toLowerCase()
         const filter = languageFilter === 'TR' ? 'turkish' : languageFilter === 'EN' ? 'english' : languageFilter === 'BOTH' ? 'both' : null
 
-        result = postObj.selectedLanguage.toLowerCase() === filter
+        result = filter === 'both' ? true : lang === filter
       } 
 
       return result
@@ -111,7 +112,7 @@ function JournalContent() {
     }
     else setIsFeedEmpty(false)
 }
-  console.log(isFeedEmpty)
+  console.log('is feed empty: ', isFeedEmpty)
 
   const disabledDate = (current) => {
     if (!dates) return false;
@@ -141,7 +142,7 @@ function JournalContent() {
   }
 
   const renderPosts = (data) => data && data.map((post, index) => <Post post={post} key={index}/>)
-  console.log(dateFilteredPostsData)
+  console.log('date filtered poststtsts: ', dateFilteredPostsData)
   return (
     <div className='journal-content-wrapper'>
         <div className='journal-content-container'>
