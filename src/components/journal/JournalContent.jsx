@@ -19,7 +19,6 @@ function JournalContent() {
   const [dates, setDates] = useState(null);
   const [value, setValue] = useState([]);
   const [languageFilter, setLanguageFilter] = useState('BOTH')
-  const [postsToRender, setPostsToRender] = useState([])
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -45,109 +44,56 @@ function JournalContent() {
       endDate = dayjs(endDate).endOf('day')
 
       filterPostsDataByDate(startDate, endDate)
-  }, [value])
+  }, [value, languageFilter])
 
   useEffect(() => {
-    const filteredData = filterPostsDataByLanguage()
-
-    setLanguageFilteredPostsData(filteredData)
+    if (!((value || []).length) && !((dateFilteredPostsData || []).length)) {
+      if (languageFilter !== 'BOTH') {
+        let languageFilteredData = applyLanguageFilter(postsData)
+        
+        setLanguageFilteredPostsData(languageFilteredData)
+      } else if (languageFilter === 'BOTH') {
+        setLanguageFilteredPostsData(postsData)
+      }
+    }
   }, [languageFilter])
 
-  // useEffect(() => {
-  //   if (languageFilter !== 'BOTH') {
-  //     if ((dateFilteredPostsData || []).length) {
-  //       filterPostsByLanguage(dateFilteredPostsData)
-  //     } else if ((postsData || []).length) {
-  //       filterPostsByLanguage(postsData)
-  //     }
-  //   } else {
-  //     setPostsToRender(postsData)
-  //   }
-  // }, [languageFilter])
-
-  // useEffect(() => {
-  //   if (languageFilteredPostsData.length) {
-  //     if (!dateFilteredPostsData.length){
-  //       setPostsToRender(languageFilteredPostsData)
-  //     } else if (dateFilteredPostsData.length) {
-  //       const data = dateFilteredPostsData.filter((postObj) => {
-  //         let result;
-  //         const filter = languageFilter === 'TR' ? 'turkish' : languageFilter === 'EN' ? 'english' : languageFilter === 'BOTH' ? 'both' : null
-
-  //         result = postObj.selectedLanguage.toLowerCase() === filter
-
-  //         return result
-  //       })
-
-  //       checkIsEmptyFeed()
-  //       setPostsToRender(data)
-  //     }
-  //   }
-  // }, [postsData, dateFilteredPostsData, languageFilteredPostsData])
-
-  const filterPostsDataByLanguage = () => {
-    let res
-
-    if (!dateFilteredPostsData.length) {
-      const filteredData = (postsData || []).filter((postObj) => {
-        const lang = postObj.selectedLanguage.toLowerCase()
-        const filter = languageFilter === 'TR' ? 'turkish' : languageFilter === 'EN' ? 'english' : languageFilter === 'BOTH' ? 'both' : null
-
-        return filter === 'both' ? true : lang === filter
-      })
-
-      res = filteredData
-    } else if (dateFilteredPostsData.length) {
-      const filteredData = (dateFilteredPostsData || []).filter((postObj) => {
-        const lang = postObj.selectedLanguage.toLowerCase()
-        const filter = languageFilter === 'TR' ? 'turkish' : languageFilter === 'EN' ? 'english' : languageFilter === 'BOTH' ? 'both' : null
-
-        return filter === 'both' ? true : lang === filter
-      })
-
-      res = filteredData
-    }
-
-    return res
-  }
-
-  console.log(languageFilteredPostsData)
-
   const filterPostsDataByDate = (startDate, endDate) => {
-    const filteredData = (postsData || []).filter((postObj) => {
+    let dataFilteredData = (postsData || []).filter((postObj) => {
       if (!!startDate && !!endDate) {
         return (postObj.date < endDate) && (postObj.date > startDate)
       }
     })
 
-    setDateFilteredPostsData(filteredData)
+    dataFilteredData = applyLanguageFilter(dataFilteredData)
+    setDateFilteredPostsData(dataFilteredData)
     checkIsEmptyFeed()
   }
 
-  // const filterPostsByLanguage = (data) => {
-  //   const filteredData = (data || []).filter((postObj) => {
-  //     let result;
+  const applyLanguageFilter = (data) => {
+    return data.filter((postObj) => {
+      const lang = postObj.selectedLanguage.toLowerCase()
+      const filter = languageFilter === 'TR' ? 'turkish' : languageFilter === 'EN' ? 'english' : languageFilter === 'BOTH' ? 'both' : null
 
-  //     if (postObj.selectedLanguage) {
-  //       const lang = postObj.selectedLanguage.toLowerCase()
-  //       const filter = languageFilter === 'TR' ? 'turkish' : languageFilter === 'EN' ? 'english' : languageFilter === 'BOTH' ? 'both' : null
-
-  //       result = filter === 'both' ? true : lang === filter
-  //     } 
-
-  //     return result
-  //   })
-
-  //   setLanguageFilteredPostsData(filteredData)
-  //}
+      return filter === 'both' ? true : lang === filter
+    })
+  }
 
   const checkIsEmptyFeed = () => {
-    if ((value || []).length) {
-      if (dateFilteredPostsData.length == 0) setIsFeedEmpty(true)
+    if ((value || []).length && !dateFilteredPostsData.length) {
+      console.log('condition1')
+      setIsFeedEmpty(true)
+    } else if ((value || []).length && dateFilteredPostsData.length) {
+      console.log('condition2')
+      setIsFeedEmpty(false)
+    } else if (!((value || []).length) && languageFilter !== 'BOTH' && !languageFilteredPostsData.length) {
+      console.log('condition3')
+      setIsFeedEmpty(true)
     }
     else setIsFeedEmpty(false)
-}
-
+  }
+  console.log(isFeedEmpty)
+  console.log('date filtered data:', dateFilteredPostsData)
   const disabledDate = (current) => {
     if (!dates) return false;
 
@@ -176,7 +122,7 @@ function JournalContent() {
   }
 
   const renderPosts = (data) => data && data.map((post, index) => <Post post={post} key={index}/>)
-  //console.log('date filtered poststtsts: ', dateFilteredPostsData)
+
   return (
     <div className='journal-content-wrapper'>
         <div className='journal-content-container'>
@@ -195,10 +141,12 @@ function JournalContent() {
               />
             </div>
           </div>
-          {/*isFeedEmpty ? <div>No data available!</div> : !postsToRender.length ? renderPosts(postsData) : renderPosts(postsToRender)*/}
-          {(dateFilteredPostsData || []).length
+          {isFeedEmpty ? <div>No data available!</div>
+            : (dateFilteredPostsData || []).length
             ? renderPosts(dateFilteredPostsData)
-            : isFeedEmpty ? <div>No data available!</div> : renderPosts(postsData)}
+            : (languageFilteredPostsData || []).length
+            ? renderPosts(languageFilteredPostsData)
+            : renderPosts(postsData)}
         </div>
     </div>
   )
