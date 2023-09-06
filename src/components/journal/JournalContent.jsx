@@ -20,6 +20,7 @@ function JournalContent() {
   const [dates, setDates] = useState(null);
   const [value, setValue] = useState([]);
   const [languageFilter, setLanguageFilter] = useState('BOTH')
+  const [filterWarning, setFilterWarning] = useState(false)
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -62,6 +63,20 @@ function JournalContent() {
       setDateFilteredPostsData(filteredData)
     }
   }, [languageFilter])
+
+  useEffect(() => {
+    document.querySelectorAll('.ant-segmented-item').forEach(($item) => {
+      $item.addEventListener('click', () => {
+        setTimeout(() => {
+          if ((value || []).length) {
+            setFilterWarning(true)
+          } else {
+            setFilterWarning(false)
+          }
+        })
+      }, 1000)
+    })
+  }, [value])
 
   useEffect(() => { checkIsEmptyFeed() }, [dateFilteredPostsData])
 
@@ -144,6 +159,7 @@ function JournalContent() {
               />
             </div>
           </div>
+          {filterWarning && <div style={{fontSize: '10px', color:'red'}}>Please select language before applying date filter!</div>}
           {isFeedEmpty ? <div>No data available!</div>
             : (dateFilteredPostsData || []).length
             ? renderPosts(dateFilteredPostsData)
