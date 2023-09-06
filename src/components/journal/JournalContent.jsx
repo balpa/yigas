@@ -44,7 +44,7 @@ function JournalContent() {
       endDate = dayjs(endDate).endOf('day')
 
       filterPostsDataByDate(startDate, endDate)
-  }, [value, languageFilter])
+  }, [value])
 
   useEffect(() => {
     if (!((value || []).length) && !((dateFilteredPostsData || []).length)) {
@@ -58,16 +58,19 @@ function JournalContent() {
     }
   }, [languageFilter])
 
+  useEffect(() => {
+    checkIsEmptyFeed()
+  }, [dateFilteredPostsData])
+
   const filterPostsDataByDate = (startDate, endDate) => {
-    let dataFilteredData = (postsData || []).filter((postObj) => {
+    let dateFilteredData = (postsData || []).filter((postObj) => {
       if (!!startDate && !!endDate) {
         return (postObj.date < endDate) && (postObj.date > startDate)
       }
     })
 
-    dataFilteredData = applyLanguageFilter(dataFilteredData)
-    setDateFilteredPostsData(dataFilteredData)
-    checkIsEmptyFeed()
+    dateFilteredData = applyLanguageFilter(dateFilteredData)
+    setDateFilteredPostsData(dateFilteredData)
   }
 
   const applyLanguageFilter = (data) => {
@@ -80,6 +83,7 @@ function JournalContent() {
   }
 
   const checkIsEmptyFeed = () => {
+    console.log(dateFilteredPostsData)
     if ((value || []).length && !dateFilteredPostsData.length) {
       console.log('condition1')
       setIsFeedEmpty(true)
@@ -92,8 +96,7 @@ function JournalContent() {
     }
     else setIsFeedEmpty(false)
   }
-  console.log(isFeedEmpty)
-  console.log('date filtered data:', dateFilteredPostsData)
+
   const disabledDate = (current) => {
     if (!dates) return false;
 
