@@ -13,6 +13,7 @@ function JournalContent() {
 
   const [postsData, setPostsData] = useState([])
   const [dateFilteredPostsData, setDateFilteredPostsData] = useState([])
+  const [originalDateFilteredPostsData, setOriginalDateFilteredPostsData] = useState([])
   const [languageFilteredPostsData, setLanguageFilteredPostsData] = useState([])
   const [isDataFetched, setIsDataFetched] = useState(false)
   const [isFeedEmpty, setIsFeedEmpty] = useState(false)
@@ -47,7 +48,7 @@ function JournalContent() {
   }, [value])
 
   useEffect(() => {
-    if (!((value || []).length) && !((dateFilteredPostsData || []).length)) {
+    if (!((value || []).length) && !((originalDateFilteredPostsData || []).length)) {
       if (languageFilter !== 'BOTH') {
         let languageFilteredData = applyLanguageFilter(postsData)
         
@@ -55,12 +56,14 @@ function JournalContent() {
       } else if (languageFilter === 'BOTH') {
         setLanguageFilteredPostsData(postsData)
       }
+    } else if ((value || []).length && (originalDateFilteredPostsData || []).length) {
+      const filteredData = applyLanguageFilter(originalDateFilteredPostsData)
+
+      setDateFilteredPostsData(filteredData)
     }
   }, [languageFilter])
 
-  useEffect(() => {
-    checkIsEmptyFeed()
-  }, [dateFilteredPostsData])
+  useEffect(() => { checkIsEmptyFeed() }, [dateFilteredPostsData])
 
   const filterPostsDataByDate = (startDate, endDate) => {
     let dateFilteredData = (postsData || []).filter((postObj) => {
@@ -71,6 +74,7 @@ function JournalContent() {
 
     dateFilteredData = applyLanguageFilter(dateFilteredData)
     setDateFilteredPostsData(dateFilteredData)
+    setOriginalDateFilteredPostsData(dateFilteredData)
   }
 
   const applyLanguageFilter = (data) => {
@@ -83,15 +87,11 @@ function JournalContent() {
   }
 
   const checkIsEmptyFeed = () => {
-    console.log(dateFilteredPostsData)
     if ((value || []).length && !dateFilteredPostsData.length) {
-      console.log('condition1')
       setIsFeedEmpty(true)
     } else if ((value || []).length && dateFilteredPostsData.length) {
-      console.log('condition2')
       setIsFeedEmpty(false)
     } else if (!((value || []).length) && languageFilter !== 'BOTH' && !languageFilteredPostsData.length) {
-      console.log('condition3')
       setIsFeedEmpty(true)
     }
     else setIsFeedEmpty(false)
