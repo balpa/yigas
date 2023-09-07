@@ -1,6 +1,6 @@
 import '../App.css'
 import MenuItem from './menu/MenuItem'
-//import Logo from './Logo'
+import Logo from './Logo'
 import Hamburger from './menu/Hamburger';
 import PropTypes from 'prop-types';
 import { motion, useScroll, useTransform } from 'framer-motion'
@@ -9,7 +9,7 @@ function Header({isHomePage}) {
   const { scrollYProgress } = useScroll();
   const dynamicHeight = useTransform(
     scrollYProgress,
-    isHomePage ? [0, 0.1] : [0, 1],
+    [0, 0.1],
     [80, 35]
   )
   const dynamicMargin = useTransform(
@@ -20,19 +20,18 @@ function Header({isHomePage}) {
 
   const aboutMeText = 'Hello. I’m Yiğit, but many call me Yigas (shortened version of my name and surname). I am an English Language and Literature graduate, but I currently work as data scientist at a private bank in Istanbul and on my free time I do basketball data analysis.'
 
-
   return (
     <>
-    <motion.div style={{height: dynamicHeight}} className="header-menu">
+    <motion.div style={isHomePage ? {height: dynamicHeight} : {}} className="header-menu">
       <div className="desktop-menu-wrapper">
-        {/* <Logo /> */}
+        <Logo isHomePage={isHomePage}/>
         <MenuItem name={'About'}/>
         <MenuItem name={'Journal'}/>
         <MenuItem name={'Blog'}/>
         <MenuItem name={'Contact'}/>
       </div>
       <div className="mobile-menu-wrapper">
-        {/* <Logo /> */}
+        <Logo isHomePage={isHomePage}/>
         <Hamburger />
       </div>
     </motion.div>

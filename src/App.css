@@ -37,10 +37,9 @@ a {
 }
 
 .header-menu, .desktop-menu-wrapper {
-  width: 100%;
+
   min-height: 35px !important;
   height: 100%;
-  background-color: var(--burgundyTransparent);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -50,6 +49,9 @@ a {
 }
 
 .header-menu {
+  height: 80px;
+  background-color: var(--burgundy);
+  width: 100% !important;
   position: sticky;
   top: 0;
   z-index: 3;
@@ -97,15 +99,11 @@ a {
   border-top: 1px solid gray;
 }
 
-/*.logo {
-  width: 73px;
-  height: 89px;
-  margin-right: 50px;
-  background-image: url('https://cdn.discordapp.com/attachments/291973336500535298/1142584783088660490/court.png');
-  background-repeat: no-repeat;
-  background-size: cover;
-  transform: rotate(270deg);
-}*/
+.logo {
+  width: 50px;
+  margin-right: -15px;
+  transform: translateX(-60px);
+}
 
 .header-about-me-wrapper {
   max-width: 1080px;
@@ -191,6 +189,7 @@ a {
   transition: 0.5s;
   will-change: transform;
   font-size: 21px;
+  transform: translateX(-60px);
 }
 
 .menu-item:hover {
@@ -670,6 +669,13 @@ p > img {
 @media screen and (max-width: 480px) {
   .hamburger-menu-wrapper {
     display: block !important;
+  }
+
+  .logo {
+    position: absolute;
+    left: 0;
+    margin-right: unset !important;
+    transform: unset !important;
   }
 
   .mobile-menu-wrapper {
