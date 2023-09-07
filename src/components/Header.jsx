@@ -38,14 +38,14 @@ function Header({isHomePage}) {
     {isHomePage && <motion.div style={{marginTop: dynamicMargin, marginBottom: dynamicMargin}} className="header-about-me-wrapper">
       <div className="header-about-me-left">
         <motion.div
-          initial={{ translateX: -500 }}
+          initial={{ translateX: -2000 }}
           animate={{ translateX: 0 }}
           transition={{ type: "spring", stiffness: 40 }}
           className="header-about-me-bold-title">About Me</motion.div>
         <motion.div
-          initial={{ translateX: -1000 }}
+          initial={{ translateX: -2000 }}
           animate={{ translateX: 0 }}
-          transition={{delay: 0.7, type: "spring", stiffness: 40 }}
+          transition={{delay: 0.7, type: "spring", stiffness: 30 }}
           className="header-about-me-text">{aboutMeText}</motion.div>
       </div>
       <motion.div

@@ -189,7 +189,7 @@ a {
   transition: 0.5s;
   will-change: transform;
   font-size: 21px;
-  transform: translateX(-60px);
+  transform: translateX(-40px);
 }
 
 .menu-item:hover {
