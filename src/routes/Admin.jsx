@@ -13,7 +13,7 @@ function Admin() {
   const [email, setEmail] = useState('')
   const [isPostSent, setIsPostSent] = useState(false)
   const [isLoggedIn, setIsLoggedin] = useState(false)
-  const [language, setLanguage] = useState('')
+  const [language, setLanguage] = useState('turkish')
 
   const navigate = useNavigate();
   const auth = getAuth();
@@ -63,7 +63,7 @@ function Admin() {
           ) : (
             <>
             <label htmlFor='languages'>Select language</label>
-            <select name="languages" id="admin-journal-post-language-input" onChange={(e) => {setLanguage(e.target.value)}}>
+            <select name="languages" id="admin-journal-post-language-input" selected onChange={(e) => {setLanguage(e.target.value)}}>
               <option value="english">English</option>
               <option value="turkish">Turkish</option>
             </select>

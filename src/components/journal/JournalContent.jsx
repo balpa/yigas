@@ -1,9 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import '../../App.css'
 import Post from './Post';
 import { useState, useEffect } from 'react';
 import { collection, getDocs } from "firebase/firestore";
 import { db } from '../../../firebase';
-import { DatePicker } from 'antd';
+import { DatePicker, Segmented } from 'antd';
 import dayjs from 'dayjs';
 
 function JournalContent() {
@@ -12,39 +13,14 @@ function JournalContent() {
 
   const [postsData, setPostsData] = useState([])
   const [dateFilteredPostsData, setDateFilteredPostsData] = useState([])
+  const [originalDateFilteredPostsData, setOriginalDateFilteredPostsData] = useState([])
+  const [languageFilteredPostsData, setLanguageFilteredPostsData] = useState([])
   const [isDataFetched, setIsDataFetched] = useState(false)
   const [isFeedEmpty, setIsFeedEmpty] = useState(false)
   const [dates, setDates] = useState(null);
   const [value, setValue] = useState([]);
-
-  useEffect(() => {
-      let startDate = new Date(((value || [])[0] || {})['$d']).getTime() 
-      let endDate = new Date(((value || [])[1] || {})['$d']).getTime()
-
-      startDate = dayjs(startDate).startOf('day')
-      endDate = dayjs(endDate).endOf('day')
-
-      filterPostsDataByDate(startDate, endDate)
-
-      checkIsEmptyFeed()
-  }, [value])
-
-  const filterPostsDataByDate = (startDate, endDate) => {
-    const filteredData = postsData.filter((postObj) => {
-      if (!!startDate && !!endDate) {
-        return (postObj.date < endDate) && (postObj.date > startDate)
-      }
-    })
-
-    setDateFilteredPostsData(filteredData)
-  }
-
-  const checkIsEmptyFeed = () => {
-    if ((value || []).length) {
-      if (!dateFilteredPostsData.length) setIsFeedEmpty(true)
-    }
-    else setIsFeedEmpty(false)
-  }
+  const [languageFilter, setLanguageFilter] = useState('BOTH')
+  const [filterWarning, setFilterWarning] = useState(false)
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -61,6 +37,80 @@ function JournalContent() {
   
     fetchPosts()
   }, [])
+
+  useEffect(() => {
+      let startDate = new Date(((value || [])[0] || {})['$d']).getTime() 
+      let endDate = new Date(((value || [])[1] || {})['$d']).getTime()
+
+      startDate = dayjs(startDate).startOf('day')
+      endDate = dayjs(endDate).endOf('day')
+
+      filterPostsDataByDate(startDate, endDate)
+  }, [value])
+
+  useEffect(() => {
+    if (!((value || []).length) && !((originalDateFilteredPostsData || []).length)) {
+      if (languageFilter !== 'BOTH') {
+        let languageFilteredData = applyLanguageFilter(postsData)
+        
+        setLanguageFilteredPostsData(languageFilteredData)
+      } else if (languageFilter === 'BOTH') {
+        setLanguageFilteredPostsData(postsData)
+      }
+    } else if ((value || []).length && (originalDateFilteredPostsData || []).length) {
+      const filteredData = applyLanguageFilter(originalDateFilteredPostsData)
+
+      setDateFilteredPostsData(filteredData)
+    }
+  }, [languageFilter])
+
+  useEffect(() => {
+    document.querySelectorAll('.ant-segmented-item').forEach(($item) => {
+      $item.addEventListener('click', () => {
+        setTimeout(() => {
+          if ((value || []).length) {
+            setFilterWarning(true)
+          } else {
+            setFilterWarning(false)
+          }
+        })
+      }, 1000)
+    })
+  }, [value])
+
+  useEffect(() => { checkIsEmptyFeed() }, [dateFilteredPostsData])
+
+  const filterPostsDataByDate = (startDate, endDate) => {
+    let dateFilteredData = (postsData || []).filter((postObj) => {
+      if (!!startDate && !!endDate) {
+        return (postObj.date < endDate) && (postObj.date > startDate)
+      }
+    })
+
+    dateFilteredData = applyLanguageFilter(dateFilteredData)
+    setDateFilteredPostsData(dateFilteredData)
+    setOriginalDateFilteredPostsData(dateFilteredData)
+  }
+
+  const applyLanguageFilter = (data) => {
+    return data.filter((postObj) => {
+      const lang = postObj.selectedLanguage.toLowerCase()
+      const filter = languageFilter === 'TR' ? 'turkish' : languageFilter === 'EN' ? 'english' : languageFilter === 'BOTH' ? 'both' : null
+
+      return filter === 'both' ? true : lang === filter
+    })
+  }
+
+  const checkIsEmptyFeed = () => {
+    if ((value || []).length && !dateFilteredPostsData.length) {
+      setIsFeedEmpty(true)
+    } else if ((value || []).length && dateFilteredPostsData.length) {
+      setIsFeedEmpty(false)
+    } else if (!((value || []).length) && languageFilter !== 'BOTH' && !languageFilteredPostsData.length) {
+      setIsFeedEmpty(true)
+    }
+    else setIsFeedEmpty(false)
+  }
 
   const disabledDate = (current) => {
     if (!dates) return false;
@@ -89,13 +139,14 @@ function JournalContent() {
     });
   }
 
-  const renderPosts = (data) => data.map((post, index) => <Post post={post} key={index}/>)
+  const renderPosts = (data) => data && data.map((post, index) => <Post post={post} key={index}/>)
 
   return (
     <div className='journal-content-wrapper'>
         <div className='journal-content-container'>
           <div className='journal-content-quote'>&quot;A wise man, therefore, proportions his belief to the evidence.&quot;</div>
           <div className='journal-content-title'>my 2 cents</div>
+          <Segmented options={['EN', 'BOTH', 'TR']} value={languageFilter} defaultValue='BOTH' onChange={setLanguageFilter} />
           <div className='journal-content-filter-wrapper'>
             <div className='journal-content-date-filter-wrapper'>
               <RangePicker
@@ -108,9 +159,13 @@ function JournalContent() {
               />
             </div>
           </div>
-          {dateFilteredPostsData.length
+          {filterWarning && <div style={{fontSize: '10px', color:'red'}}>Please select language before applying date filter!</div>}
+          {isFeedEmpty ? <div>No data available!</div>
+            : (dateFilteredPostsData || []).length
             ? renderPosts(dateFilteredPostsData)
-            : isFeedEmpty ? <div>No data available!</div> : renderPosts(postsData)}
+            : (languageFilteredPostsData || []).length
+            ? renderPosts(languageFilteredPostsData)
+            : renderPosts(postsData)}
         </div>
     </div>
   )
