@@ -343,7 +343,7 @@ a {
 
 .contact-content-wrapper {
   width: 100%;
-  height: calc(100vh - 50px);
+  /*height: calc(100vh - 50px);*/
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -484,6 +484,10 @@ a {
 
 .hamburger-wrapper-active > .menu-item {
   color: black;
+}
+
+.hamburger-wrapper > .menu-item {
+  transform: unset !important;
 }
 
 .hamburger-close-button {

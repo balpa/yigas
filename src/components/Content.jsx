@@ -18,7 +18,7 @@ function Content() {
     },
     {
       title: 'Learning Mathematics',
-      text: 'It bothered me that I did not know any mathematics and wondered how much knowing mathematics can help with statistics. There was someone that I got to know by playing Hearthstone (yes, I enjoy card games): Dr. Basar Coskunoglu. I started studying mathematics with him. He was patient enough to start from very basics (I didn’t know anything, literally, so we had to start from functions, inequality systems etc.) with me. We made it all the way through calculus and linear algebra. We finished at a point where it was possible for me to go through books by myself, which was what I wanted in the first place. To this day, I still study linear algebra from different sources (mainly from my notes, <a class="italic-text" href="https://mml-book.github.io" target="_blank">Mathematics for Machine Learning</a> and <a href="https://www.amazon.com/Linear-Gilbert-Strang-Algebra/s?rh=n%3A13899%2Cp_lbr_one_browse-bin%3AGilbert+Strang" target="_blank">Gilbert Strang’s books</a>) almost weekly since I enjoy it very much.'
+      text: 'It bothered me that I did not know any mathematics and wondered how much knowing mathematics can help with statistics. There was someone that I got to know by playing Hearthstone (yes, I enjoy card games): Dr. Basar Coskunoglu. I started studying mathematics with him. He was patient enough to start from very basics (I didn’t know anything, literally, so we had to start from functions, inequality systems etc.) with me. We made it all the way to the calculus and linear algebra. We finished at a point where it was possible for me to go through books by myself, which was what I wanted in the first place. To this day, I still study linear algebra from different sources (mainly from my notes, <a class="italic-text" href="https://mml-book.github.io" target="_blank">Mathematics for Machine Learning</a> and <a href="https://www.amazon.com/Linear-Gilbert-Strang-Algebra/s?rh=n%3A13899%2Cp_lbr_one_browse-bin%3AGilbert+Strang" target="_blank">Gilbert Strang’s books</a>) almost weekly since I enjoy it very much.'
     },
     {
       title: 'Python for Data Science & ML',
@@ -26,7 +26,7 @@ function Content() {
     },
     {
       title: 'Data Science Internship',
-      text: 'At the time I was still an undergraduate and was awarded a scholarship from TUBITAK (The Scientific and Technological Research Council of Turkey) for taking a part in a research project. But due to some circumstances, I wanted to try my chances outside academia. I wanted a part-time job or a long-term internship since I was still at school and did not want to burn out. Anyway, I started doing data science projects and included them on my CV under the “projects” part. I applied to different jobs but during the interviews I realized that many did not have a data science team and it scared me a little since it was going to be my first job, I felt like I needed a group of people that have some experience. Although I wasn’t sure how I would fit in a bank, I applied to DenizBank’s long term internship and after many steps I was accepted as data science intern.'
+      text: 'At the time I was still an undergraduate and was awarded a scholarship from TUBITAK (The Scientific and Technological Research Council of Turkey) for taking a part in a research project. But due to some circumstances, I wanted to try my chances outside the academia. I wanted a part-time job or a long-term internship since I was still at school and did not want to burn out. Anyway, I started doing data science projects and included them on my CV under the “projects” part. I applied to different jobs but during the interviews I realized that many did not have a data science team and it scared me a little since it was going to be my first job, I felt like I needed a group of people that have some experience. Although I wasn’t sure how I would fit in a bank, I applied to DenizBank’s long term internship and after some steps, I was accepted as data science intern.'
     },
     {
       title: 'Transition To Full-Time',
@@ -34,7 +34,7 @@ function Content() {
     },
     {
       title: 'Basketball Analytics',
-      text: 'I played basketball for ten years and I also trained players. It was always in my mind to do something close to basketball. I saw <a href="https://linktr.ee/fdataanalysis" target="_blank">Formula 1 (F1) analytics account</a> that does F1 analysis, and it inspired me to do something similar with basketball data. You can follow my basketball analytics accounts from the upper right corner.'
+      text: 'I played basketball for ten years and I also trained players. It was always in my mind to do something close to basketball. I saw <a href="https://linktr.ee/fdataanalysis" target="_blank">Formula 1 (F1) analytics account</a> that does F1 analyses, and it inspired me to do something similar with basketball data. You can follow my basketball analytics accounts from the upper right corner.'
     }
   ]
 
