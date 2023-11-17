@@ -103,6 +103,7 @@ a {
   width: 50px;
   margin-right: -15px;
   transform: translateX(-60px);
+  cursor: pointer;
 }
 
 .header-about-me-wrapper {
