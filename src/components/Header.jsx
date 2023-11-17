@@ -18,7 +18,7 @@ function Header({isHomePage}) {
     [50, 10]
   )
 
-  const aboutMeText = 'Hello. I’m Yiğit, but many call me Yigas (shortened version of my name and surname). I am an English Language and Literature graduate, but I currently work as data scientist at a private bank in Istanbul and on my free time I do basketball data analysis.'
+  const aboutMeText = 'Hello. I’m Yiğit, but many call me Yigas (shortened version of my name and surname). I am an English Literature graduate, but I currently work as a data scientist at a private bank in Istanbul and in my free time I analyze and statistically model basketball data.'
 
   return (
     <>
