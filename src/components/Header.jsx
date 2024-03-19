@@ -1,9 +1,11 @@
-import '../App.css'
-import MenuItem from './menu/MenuItem'
-import Logo from './Logo'
+import '../App.css';
+import React from 'react';
+import MenuItem from './menu/MenuItem';
+import Logo from './Logo';
 import Hamburger from './menu/Hamburger';
 import PropTypes from 'prop-types';
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { motion, useScroll, useTransform } from 'framer-motion';
+import profilePicture from '../assets/pp.jpg';
 
 function Header({isHomePage}) {
   const { scrollYProgress } = useScroll();
@@ -19,6 +21,15 @@ function Header({isHomePage}) {
   )
 
   const aboutMeText = 'Hello. I’m Yiğit, but many call me Yigas (shortened version of my name and surname). I am an English Literature graduate, but I currently work as a data scientist at a private bank in Istanbul and in my free time I analyze and statistically model basketball data.'
+
+  React.useEffect(() => {
+    const handleLoad = () => document.getElementsByClassName('header-about-me-right-image')[0].style.backgroundImage =
+      `url(${ profilePicture })`;
+
+    window.addEventListener('load', handleLoad);
+
+    return () => window.removeEventListener('load', handleLoad);
+  }, []);
 
   return (
     <>
