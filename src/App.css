@@ -190,6 +190,7 @@ a {
   will-change: transform;
   font-size: 21px;
   transform: translateX(-40px);
+  color: #fffffff9 !important;
 }
 
 .menu-item:hover {

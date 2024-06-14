@@ -30,7 +30,7 @@ function Header({isHomePage}) {
         <Logo isHomePage={isHomePage}/>
         <MenuItem name={'About'}/>
         <MenuItem name={'Journal'}/>
-        <MenuItem name={'Blog'}/>
+        <a className='menu-item' href='https://www.my-2-cents.net/'>Blog</a>
         <MenuItem name={'Contact'}/>
       </div>
       <div className="mobile-menu-wrapper">
