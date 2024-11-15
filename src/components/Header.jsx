@@ -9,7 +9,7 @@ import profilePicture from '../assets/pp.jpg';
 function Header({isHomePage}) {
   const { scrollYProgress } = useScroll();
 
-  const aboutMeText = 'Hello. I’m Yiğit, but many call me Yigas (shortened version of my name and surname). I am an English Literature graduate, but I currently work as a data scientist at a private bank in Istanbul and in my free time I analyze and statistically model basketball data.';
+  const aboutMeText = "Hello! I'm Yiğit, though many people call me Yigas—a nickname blending my first and last names. I hold a degree in English Literature, but I currently work as a data scientist at a private bank in Istanbul. In my free time, I dive into basketball data, exploring patterns and creating statistical models.";
 
   const dynamicHeight = useTransform(
     scrollYProgress,
