@@ -17,7 +17,7 @@
     "@mui/material": "^5.14.7",
     "antd": "^5.8.4",
     "dayjs": "^1.11.9",
-    "firebase": "^10.2.0",
+    "firebase": "^10.14.1",
     "framer-motion": "^10.16.3",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.1",
